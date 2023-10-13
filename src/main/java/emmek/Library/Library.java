@@ -77,11 +77,11 @@ public class Library {
     }
 
     public List<LibraryItem> findYear(String filter) {
-        return this.library.stream().filter(elm -> (elm.getYear().equals(filter))).toList();
+        return this.library.stream().filter(elm -> (elm.getYear().contains(filter))).toList();
     }
 
     public List<LibraryItem> findAuthor(String filter) {
-        return this.library.stream().filter(elm -> (elm instanceof Book)).filter(book -> ((Book) book).getAuthor().equals(filter)).toList();
+        return this.library.stream().filter(elm -> (elm instanceof Book)).filter(book -> ((Book) book).getAuthor().toLowerCase().contains(filter)).toList();
     }
 
 }

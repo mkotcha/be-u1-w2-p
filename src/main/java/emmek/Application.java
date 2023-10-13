@@ -22,6 +22,8 @@ public class Application {
     }
 
     public static void menu() {
+        String query;
+        List<LibraryItem> result;
         int choice = -1;
         while (choice != 0) {
             System.out.println();
@@ -55,8 +57,8 @@ public class Application {
                     break;
                 case 3:
                     System.out.println("search by ISBN");
-                    String query = scanner.nextLine();
-                    List<LibraryItem> result = library.findIsbn(query);
+                    query = scanner.nextLine();
+                    result = library.findIsbn(query);
                     System.out.println("result:");
                     result.forEach(item -> System.out.print(item.toString()));
                     System.out.println();
@@ -64,10 +66,24 @@ public class Application {
                     scanner.nextLine();
                     break;
                 case 4:
-                    System.out.println("4");
+                    System.out.println("search by year");
+                    query = scanner.nextLine();
+                    result = library.findYear(query);
+                    System.out.println("result:");
+                    result.forEach(item -> System.out.print(item.toString()));
+                    System.out.println();
+                    System.out.println("press enter to continue");
+                    scanner.nextLine();
                     break;
                 case 5:
-                    System.out.println("5");
+                    System.out.println("search by author");
+                    query = scanner.nextLine().toLowerCase();
+                    result = library.findAuthor(query);
+                    System.out.println("result:");
+                    result.forEach(item -> System.out.print(item.toString()));
+                    System.out.println();
+                    System.out.println("press enter to continue");
+                    scanner.nextLine();
                     break;
                 case 6:
                     System.out.println("6");
