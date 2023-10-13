@@ -16,7 +16,6 @@ public class Application {
 
     public static void main(String[] args) {
         fakerize();
-//        System.out.println(library.toString());
         menu();
         scanner.close();
     }
@@ -106,9 +105,7 @@ public class Application {
                     System.out.println("0");
                     break;
             }
-            ;
         }
-        ;
     }
 
     private static void remItem() {
@@ -130,7 +127,7 @@ public class Application {
         String isbn;
         String title;
         String year;
-        int pages = 0;
+        int pages;
         Periodicity[] periodicityArr = Periodicity.values();
         Periodicity periodicity = null;
         int choice = -1;
@@ -238,10 +235,7 @@ public class Application {
                 ));
             }
         }
-        ;
-
     }
-
 }
 
 

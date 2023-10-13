@@ -57,18 +57,14 @@ public class Library {
         List<Magazine> magazineList = gson.fromJson(jsonStr, magazineType);
 
         bookList.forEach(elm -> {
-            if (elm.getAuthor() != null) list.add(elm);
+            if ((elm.getAuthor() != null) && (elm.getGenre() != null)) list.add(elm);
         });
         magazineList.forEach(elm -> {
             if (elm.getPeriodicity() != null) list.add(elm);
         });
 
         this.library = list;
-//        list.forEach(item -> System.out.println(item.toString()));
     }
-
-    ;
-
 
     public void add(LibraryItem item) {
         this.library.add(item);
@@ -78,15 +74,10 @@ public class Library {
         for (int i = 0; i < this.library.size(); i++) {
             System.out.print((i + 1) + " - " + this.library.get(i));
         }
-        ;
     }
 
     public void rem(int index) {
         if (index < this.library.size()) this.library.remove(index);
-    }
-
-    public void rem(LibraryItem item) {
-        this.library = this.library.stream().filter(elm -> !(elm.getIsbn().equals(item.getIsbn()))).toList();
     }
 
     public List<LibraryItem> findIsbn(String filter) {
