@@ -89,16 +89,18 @@ public class Application {
                     library.save();
                     break;
                 case 7:
-                    System.out.println("7");
+                    library.load();
+                    System.out.println(library.toString());
+                    System.out.println();
+                    System.out.println("press enter to continue");
+                    scanner.nextLine();
                     break;
                 case 8:
                     System.out.println();
                     System.out.println(library.toString());
-                    try {
-                        TimeUnit.SECONDS.sleep(2);
-                    } catch (InterruptedException ex) {
-                        System.err.println(ex.getMessage());
-                    }
+                    System.out.println();
+                    System.out.println("press enter to continue");
+                    scanner.nextLine();
                     break;
                 case 0:
                     System.out.println("0");
@@ -217,7 +219,7 @@ public class Application {
         Faker faker = new Faker();
         Random rnd = new Random();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             Periodicity[] periodicity = Periodicity.values();
             if (rnd.nextBoolean()) {
                 library.add(new Book(faker.code().isbn10(),

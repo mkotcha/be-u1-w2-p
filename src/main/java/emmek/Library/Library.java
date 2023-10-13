@@ -40,18 +40,35 @@ public class Library {
     public void load() {
         File file = new File("src/library.json");
         String jsonStr = "";
+        List<LibraryItem> list = new ArrayList<>();
         try {
             jsonStr = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        Type listOfMyClassObject = new TypeToken<ArrayList<LibraryItem>>() {
-        }.getType();
 
         Gson gson = new Gson();
-        this.library = gson.fromJson(jsonStr, listOfMyClassObject);
+        Type bookType = new TypeToken<List<Book>>() {
+        }.getType();
+        Type magazineType = new TypeToken<List<Magazine>>() {
+        }.getType();
 
+        List<Book> bookList = gson.fromJson(jsonStr, bookType);
+        List<Magazine> magazineList = gson.fromJson(jsonStr, magazineType);
+
+        bookList.forEach(elm -> {
+            if (elm.getAuthor() != null) list.add(elm);
+        });
+        magazineList.forEach(elm -> {
+            if (elm.getPeriodicity() != null) list.add(elm);
+        });
+
+        this.library = list;
+//        list.forEach(item -> System.out.println(item.toString()));
     }
+
+    ;
+
 
     public void add(LibraryItem item) {
         this.library.add(item);
