@@ -8,6 +8,14 @@ public class Magazine extends LibraryItem {
         this.periodicity = periodicity;
     }
 
+    @Override
+    public String toString() {
+        return "Magazine{" +
+                super.toString() +
+                ", periodicity=" + periodicity +
+                "}\n";
+    }
+
     public Periodicity getPeriodicity() {
         return periodicity;
     }

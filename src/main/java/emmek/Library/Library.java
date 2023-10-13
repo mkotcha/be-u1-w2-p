@@ -15,12 +15,17 @@ import java.util.stream.Collectors;
 public class Library {
     private List<LibraryItem> library;
 
-    public Library(List<LibraryItem> library) {
+    public Library() {
         this.library = new ArrayList<>();
     }
 
+    @Override
+    public String toString() {
+        return this.library.stream().map(LibraryItem::toString).collect(Collectors.joining());
+    }
+
     public void save() {
-        File file = new File("src/library.json");\
+        File file = new File("src/library.json");
 
         Gson gson = new Gson();
         String jsonStr = gson.toJson(this.library);
@@ -40,7 +45,8 @@ public class Library {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        Type listOfMyClassObject = new TypeToken<ArrayList<LibraryItem>>() {}.getType();
+        Type listOfMyClassObject = new TypeToken<ArrayList<LibraryItem>>() {
+        }.getType();
 
         Gson gson = new Gson();
         this.library = gson.fromJson(jsonStr, listOfMyClassObject);
