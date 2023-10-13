@@ -1,11 +1,9 @@
 package emmek;
 
-import emmek.Library.Book;
-import emmek.Library.Library;
-import emmek.Library.Magazine;
-import emmek.Library.Periodicity;
+import emmek.Library.*;
 import net.datafaker.Faker;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -56,7 +54,14 @@ public class Application {
                     remItem();
                     break;
                 case 3:
-                    System.out.println("3");
+                    System.out.println("search by ISBN");
+                    String query = scanner.nextLine();
+                    List<LibraryItem> result = library.findIsbn(query);
+                    System.out.println("result:");
+                    result.forEach(item -> System.out.print(item.toString()));
+                    System.out.println();
+                    System.out.println("press enter to continue");
+                    scanner.nextLine();
                     break;
                 case 4:
                     System.out.println("4");
@@ -94,16 +99,13 @@ public class Application {
             System.out.println();
             System.out.println("chose an item to remove from catalogue - 0 to exit");
             library.printIndex();
-
             try {
                 choice = abs(Integer.parseInt(scanner.nextLine()));
                 if (choice > 0) library.rem(choice - 1);
             } catch (NumberFormatException ex) {
                 System.err.println("not a number");
             }
-
         }
-
     }
 
     private static void addItem() {

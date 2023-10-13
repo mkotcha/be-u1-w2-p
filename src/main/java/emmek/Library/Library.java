@@ -73,7 +73,7 @@ public class Library {
     }
 
     public List<LibraryItem> findIsbn(String filter) {
-        return this.library.stream().filter(elm -> (elm.getIsbn().equals(filter))).toList();
+        return this.library.stream().filter(elm -> (elm.getIsbn().contains(filter))).toList();
     }
 
     public List<LibraryItem> findYear(String filter) {
