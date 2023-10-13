@@ -34,7 +34,6 @@ public class Application {
                         periodicity[rnd.nextInt(periodicity.length)]
                 ));
             }
-
         }
         ;
         System.out.println(library.toString());
