@@ -57,6 +57,17 @@ public class Library {
         this.library.add(item);
     }
 
+    public void printIndex() {
+        for (int i = 0; i < this.library.size(); i++) {
+            System.out.print((i + 1) + " - " + this.library.get(i));
+        }
+        ;
+    }
+
+    public void rem(int index) {
+        if (index < this.library.size()) this.library.remove(index);
+    }
+
     public void rem(LibraryItem item) {
         this.library = this.library.stream().filter(elm -> !(elm.getIsbn().equals(item.getIsbn()))).toList();
     }

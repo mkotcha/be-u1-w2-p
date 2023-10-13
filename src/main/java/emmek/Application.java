@@ -38,6 +38,7 @@ public class Application {
             System.out.println("5 - find item by author");
             System.out.println("6 - save on disk");
             System.out.println("7 - load from disk");
+            System.out.println("8 - print all library catalogue");
             System.out.println("0 - exit");
             System.out.println();
 
@@ -52,7 +53,7 @@ public class Application {
                     addItem();
                     break;
                 case 2:
-                    System.out.println("2");
+                    remItem();
                     break;
                 case 3:
                     System.out.println("3");
@@ -69,6 +70,15 @@ public class Application {
                 case 7:
                     System.out.println("7");
                     break;
+                case 8:
+                    System.out.println();
+                    System.out.println(library.toString());
+                    try {
+                        TimeUnit.SECONDS.sleep(2);
+                    } catch (InterruptedException ex) {
+                        System.err.println(ex.getMessage());
+                    }
+                    break;
                 case 0:
                     System.out.println("0");
                     break;
@@ -76,6 +86,24 @@ public class Application {
             ;
         }
         ;
+    }
+
+    private static void remItem() {
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println();
+            System.out.println("chose an item to remove from catalogue - 0 to exit");
+            library.printIndex();
+
+            try {
+                choice = abs(Integer.parseInt(scanner.nextLine()));
+                if (choice > 0) library.rem(choice - 1);
+            } catch (NumberFormatException ex) {
+                System.err.println("not a number");
+            }
+
+        }
+
     }
 
     private static void addItem() {
