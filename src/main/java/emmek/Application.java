@@ -86,7 +86,7 @@ public class Application {
                     scanner.nextLine();
                     break;
                 case 6:
-                    System.out.println("6");
+                    library.save();
                     break;
                 case 7:
                     System.out.println("7");
