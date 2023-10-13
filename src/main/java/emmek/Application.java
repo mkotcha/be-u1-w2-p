@@ -109,7 +109,7 @@ public class Application {
 
     private static void remItem() {
         int choice = -1;
-        String isbn = "";
+        String isbn;
         while (choice != 0) {
             System.out.println();
             System.out.println("1 - remove an ISBN");
@@ -124,10 +124,13 @@ public class Application {
 
             if (choice == 1) {
                 System.out.println();
+                System.out.println(library.toString());
+                System.out.println();
                 System.out.println("enter an ISBN (10 number)");
                 try {
                     isbn = scanner.nextLine();
                     library.rem(isbn);
+                    System.out.println(library.toString());
                 } catch (Exception ex) {
                     System.err.println("wrong search filter");
                 }
