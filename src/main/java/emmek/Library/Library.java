@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 public class Library {
     private List<LibraryItem> library;
 
@@ -77,7 +79,11 @@ public class Library {
     }
 
     public void rem(int index) {
-        if (index < this.library.size()) this.library.remove(index);
+        if (index < this.library.size() && index >= 0) this.library.remove(index);
+    }
+
+    public void rem(String isbn) {
+        this.library = this.library.stream().filter(elm -> (!elm.getIsbn().equals(isbn))).collect(toList());
     }
 
     public List<LibraryItem> findIsbn(String filter) {

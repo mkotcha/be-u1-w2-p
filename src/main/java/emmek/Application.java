@@ -6,7 +6,6 @@ import net.datafaker.Faker;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.abs;
 
@@ -31,7 +30,7 @@ public class Application {
             System.out.println("make your choice");
             System.out.println();
             System.out.println("1 - add an item to the library");
-            System.out.println("2 - remove an item to the library");
+            System.out.println("2 - remove an item from the library");
             System.out.println("3 - find item by isbn");
             System.out.println("4 - find item by year");
             System.out.println("5 - find item by author");
@@ -110,16 +109,45 @@ public class Application {
 
     private static void remItem() {
         int choice = -1;
+        String isbn = "";
         while (choice != 0) {
             System.out.println();
-            System.out.println("chose an item to remove from catalogue - 0 to exit");
-            library.printIndex();
+            System.out.println("1 - remove an ISBN");
+            System.out.println("2 - remove from a numbered list");
+            System.out.println("0 - exit");
+
             try {
                 choice = abs(Integer.parseInt(scanner.nextLine()));
-                if (choice > 0) library.rem(choice - 1);
             } catch (NumberFormatException ex) {
                 System.err.println("not a number");
             }
+
+            if (choice == 1) {
+                System.out.println();
+                System.out.println("enter an ISBN (10 number)");
+                try {
+                    isbn = scanner.nextLine();
+                    library.rem(isbn);
+                } catch (Exception ex) {
+                    System.err.println("wrong search filter");
+                }
+
+            }
+            if (choice == 2) {
+                choice = -1;
+                while (choice != 0) {
+                    System.out.println();
+                    System.out.println("chose an item to remove from catalogue - 0 to exit");
+                    library.printIndex();
+                    try {
+                        choice = abs(Integer.parseInt(scanner.nextLine()));
+                        if (choice > 0) library.rem(choice - 1);
+                    } catch (NumberFormatException ex) {
+                        System.err.println("not a number");
+                    }
+                }
+            }
+
         }
     }
 
@@ -161,11 +189,9 @@ public class Application {
                     String genre = scanner.nextLine();
                     library.add(new Book(isbn, title, year, pages, author, genre));
                     System.out.println(library.toString());
-                    try {
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException ex) {
-                        System.err.println(ex.getMessage());
-                    }
+                    System.out.println();
+                    System.out.println("press enter to continue");
+                    scanner.nextLine();
                     choice = 0;
                     break;
                 case 2:
@@ -198,11 +224,9 @@ public class Application {
                     }
                     library.add(new Magazine(isbn, title, year, pages, periodicity));
                     System.out.println(library.toString());
-                    try {
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException ex) {
-                        System.err.println(ex.getMessage());
-                    }
+                    System.out.println();
+                    System.out.println("press enter to continue");
+                    scanner.nextLine();
                     choice = 0;
                     break;
                 case 0:
