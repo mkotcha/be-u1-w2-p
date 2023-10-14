@@ -1,6 +1,8 @@
 package emmek.Library;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.FileUtils;
 
@@ -50,19 +52,13 @@ public class Library {
         }
 
         Gson gson = new Gson();
-        Type bookType = new TypeToken<List<Book>>() {
-        }.getType();
-        Type magazineType = new TypeToken<List<Magazine>>() {
-        }.getType();
+        List<JsonObject> libraryList = gson.fromJson(jsonStr,new TypeToken<List<JsonObject>>(){}.getType());
 
-        List<Book> bookList = gson.fromJson(jsonStr, bookType);
-        List<Magazine> magazineList = gson.fromJson(jsonStr, magazineType);
-
-        bookList.forEach(elm -> {
-            if ((elm.getAuthor() != null) && (elm.getGenre() != null)) list.add(elm);
-        });
-        magazineList.forEach(elm -> {
-            if (elm.getPeriodicity() != null) list.add(elm);
+        libraryList.forEach(elm -> {
+            if (elm.asMap().get("author")!=null && elm.asMap().get("genre")!=null) {
+                list.add(gson.fromJson(elm, Book.class))
+            }
+            else list.add(gson.fromJson(elm,Magazine.class));
         });
 
         this.library = list;
